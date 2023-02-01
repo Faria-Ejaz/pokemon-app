@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+//Components
+import Nav from './components/Nav/Nav';
+import PokemonListing from './components/Pokemons/PokemonListing';
+import { DialogBox } from "./components/DialogBox/DialogBox";
+//Context
+import {PokemonContextProvider} from "./context/PokemonContext";
+
+
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      mobile: 0,
+      tablet: 640,
+      laptop: 1024,
+      desktop: 1200,
+    },
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PokemonContextProvider>
+    <ThemeProvider theme={theme}>
+      <Nav/>
+      <DialogBox/>
+      <PokemonListing/>
+    </ThemeProvider>
+    </PokemonContextProvider>
   );
 }
 
